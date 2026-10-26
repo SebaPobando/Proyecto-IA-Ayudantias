@@ -50,3 +50,10 @@ def consultar_modelo(pregunta: str, system_instruction: str = "") -> str:
 if __name__ == "__main__":
     resultado = consultar_modelo("¿Cuál es la capital de Chile?", " ")
     print(resultado)
+    
+    for i in range(10):
+        try:
+            respuesta = consultar_modelo(f"Pregunta de prueba número {i}")
+            print(f"Respuesta {i}: {respuesta[:40]}...")
+        except RuntimeError as error:
+            print(f"Respuesta {i} falló definitivamente: {error}")
