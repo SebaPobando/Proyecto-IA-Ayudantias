@@ -58,7 +58,6 @@ def enviar_peticion(url, body):
         
     if respuesta.status_code != 200:
         raise RuntimeError(f"Error en la petición. Status Code: {respuesta.status_code}")
-
     try:
         return respuesta.json()
     except requests.exceptions.JSONDecodeError:
