@@ -80,6 +80,8 @@ for consulta, referencia in casos:
         "respuesta": respuesta,
         **metricas,
     })
+    
+resultados = sorted(resultados, key=lambda r: r["f1"])
 
 with open(
     "resultados_metricas.json", "w", encoding="utf-8"

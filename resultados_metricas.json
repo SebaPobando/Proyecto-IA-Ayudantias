@@ -1,23 +1,23 @@
 [
   {
-    "consulta": "¿Qué es Python?",
-    "respuesta": "Python es un lenguaje de programación interpretado, multiparadigma y de alto nivel.",
-    "precision": 0.5833333333333334,
-    "cobertura": 1.0,
-    "f1": 0.7368421052631579
+    "consulta": "¿Qué es una lista en Python?",
+    "respuesta": "Es una estructura de datos ordenada y mutable que almacena múltiples elementos.",
+    "precision": 0.3333333333333333,
+    "cobertura": 0.5,
+    "f1": 0.4
   },
   {
     "consulta": "¿Cuándo se creó Python?",
-    "respuesta": "El lenguaje de programación Python fue creado por Guido van Rossum en 1991.",
+    "respuesta": "Python fue creado por Guido van Rossum y lanzado en febrero de 1991.",
     "precision": 0.38461538461538464,
     "cobertura": 1.0,
     "f1": 0.5555555555555556
   },
   {
-    "consulta": "¿Qué es una lista en Python?",
-    "respuesta": "Una lista en Python es una colección ordenada y mutable de elementos heterogéneos.",
+    "consulta": "¿Qué es Python?",
+    "respuesta": "Python es un lenguaje de programación interpretado, de alto nivel y muy versátil.",
     "precision": 0.5384615384615384,
-    "cobertura": 0.875,
-    "f1": 0.6666666666666667
+    "cobertura": 1.0,
+    "f1": 0.7000000000000001
   }
 ]
