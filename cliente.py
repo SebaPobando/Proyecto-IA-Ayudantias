@@ -44,8 +44,3 @@ def consultar_modelo(pregunta: str, system_instruction: str = "") -> str:
         raise RuntimeError("El servicio no respondió tras varios intentos. Intenta más tarde.")
     registrar_costo(respuesta)
     return extraer_texto(respuesta)
- 
- 
-if __name__ == "__main__":
-    resultado = consultar_modelo("¿Cuál es la capital de Chile?", " ")
-    print(resultado)
