@@ -1,6 +1,6 @@
 from collections import Counter
-from pipeline_limpieza import *
-from cliente import *
+from .pipeline_limpieza import procesar_texto
+from .cliente import consultar_modelo
 import json
 
 

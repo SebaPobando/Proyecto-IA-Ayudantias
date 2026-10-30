@@ -1,7 +1,7 @@
 from unittest.mock import patch, Mock
 import pytest
 
-import cliente
+from src import cliente
 from src.consumir_gemini import enviar_peticion
 
 @pytest.fixture(autouse=True)
@@ -43,14 +43,14 @@ def test_con_reintento_agota_intentos():
     def siempre_falla():
         raise TimeoutError("simulado")
     
-    with patch("cliente.time.sleep"):
+    with patch("src.cliente.time.sleep"):
         with pytest.raises(TimeoutError):
           cliente.con_reintento(siempre_falla, intentos=3)
           
 def test_con_reintento_no_reintenta_value_error():
     operacion = Mock(side_effect=ValueError("simulado"))
     
-    with patch("cliente.time.sleep") as dormir:
+    with patch("src.cliente.time.sleep") as dormir:
         with pytest.raises(ValueError):
             cliente.con_reintento(operacion)
             
@@ -79,7 +79,7 @@ def test_consultar_modelo_convierte_error():
     error_simulado = TimeoutError("simulado")
     
     with patch(
-        "cliente.con_reintento",
+        "src.cliente.con_reintento",
         side_effect=error_simulado,
         ):
         with pytest.raises(RuntimeError):

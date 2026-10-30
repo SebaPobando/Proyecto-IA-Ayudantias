@@ -1,7 +1,7 @@
 import time
 import random
 from typing import Callable, Any
-from src.consumir_gemini import armar_peticion, extraer_texto, enviar_peticion
+from .consumir_gemini import armar_peticion, extraer_texto, enviar_peticion
 
 MODELO = "gemini-3.6-flash"
 
