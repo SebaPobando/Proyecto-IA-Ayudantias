@@ -9,7 +9,6 @@ from src.enrutamiento import (
     construir_flujo,
 )
 
-
 @pytest.mark.parametrize("categoria,ruta_esperada", [
     ("queja", "queja"),
     ("sugerencia", "sugerencia"),
