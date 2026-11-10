@@ -98,7 +98,7 @@ def mostrar_resultado(resultado, sesion):
         print("RESULTADO:", observacion)
     
     print("ASISTENTE:", resultado["output"])
-    print("Mensaje guardos:", len(obtener_historial(sesion).messages))
+    print("Mensaje guardados:", len(obtener_historial(sesion).messages))
     
 if __name__ == "__main__":
     modelo = ChatGoogleGenerativeAI(
