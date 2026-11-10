@@ -16,5 +16,167 @@
     "precision": 0.7272727272727273,
     "cobertura": 1.0,
     "f1": 0.8421052631578948
+  },
+  {
+    "id": 3,
+    "consulta": "¿Qué es una lista en Python?",
+    "referencia": "Una lista es una colección ordenada y modificable.",
+    "respuesta": "Una lista en Python es una colección ordenada y mutable de diferentes elementos.",
+    "precision": 0.5384615384615384,
+    "cobertura": 0.875,
+    "f1": 0.6666666666666667
+  },
+  {
+    "id": 4,
+    "consulta": "¿Qué devuelve len en Python?",
+    "referencia": "len devuelve la cantidad de elementos de un objeto.",
+    "respuesta": "Devuelve el número entero de elementos que contiene un objeto.",
+    "precision": 0.5,
+    "cobertura": 0.5555555555555556,
+    "f1": 0.5263157894736842
+  },
+  {
+    "id": 5,
+    "consulta": "¿Para qué sirve print en Python?",
+    "referencia": "print muestra una representación de los objetos en la salida de texto.",
+    "respuesta": "Sirve para mostrar datos, textos o variables en la pantalla o consola.",
+    "precision": 0.16666666666666666,
+    "cobertura": 0.16666666666666666,
+    "f1": 0.16666666666666666
+  },
+  {
+    "id": 6,
+    "consulta": "¿Qué es un diccionario en Python?",
+    "referencia": "Un diccionario relaciona claves con valores.",
+    "respuesta": "Es una estructura de datos mutable que almacena información en pares de clave y valor.",
+    "precision": 0.0,
+    "cobertura": 0.0,
+    "f1": 0.0
+  },
+  {
+    "id": 7,
+    "consulta": "¿Qué es una tupla en Python?",
+    "referencia": "Una tupla es una secuencia inmutable.",
+    "respuesta": "Una tupla en Python es una colección de elementos ordenada e inmutable.",
+    "precision": 0.4166666666666667,
+    "cobertura": 0.8333333333333334,
+    "f1": 0.5555555555555556
+  },
+  {
+    "id": 8,
+    "consulta": "¿Qué es un conjunto en Python?",
+    "referencia": "Un conjunto almacena elementos únicos.",
+    "respuesta": "Un conjunto en Python es una colección desordenada y mutable de elementos únicos.",
+    "precision": 0.3076923076923077,
+    "cobertura": 0.8,
+    "f1": 0.4444444444444444
+  },
+  {
+    "id": 9,
+    "consulta": "¿Para qué sirve def en Python?",
+    "referencia": "def define una función.",
+    "respuesta": "La palabra clave `def` sirve para definir funciones y métodos en Python.",
+    "precision": 0.08333333333333333,
+    "cobertura": 0.25,
+    "f1": 0.125
+  },
+  {
+    "id": 10,
+    "consulta": "¿Qué hace return en una función?",
+    "referencia": "return termina la función y devuelve un valor al llamador.",
+    "respuesta": "Finaliza la ejecución de una función devolviendo un resultado al código que la invocó.",
+    "precision": 0.2857142857142857,
+    "cobertura": 0.4,
+    "f1": 0.3333333333333333
+  },
+  {
+    "id": 11,
+    "consulta": "¿Para qué sirve try except en Python?",
+    "referencia": "try except permite manejar excepciones.",
+    "respuesta": "Captura y maneja errores en el código para evitar la interrupción del programa.",
+    "precision": 0.0,
+    "cobertura": 0.0,
+    "f1": 0.0
+  },
+  {
+    "id": 12,
+    "consulta": "¿Qué indica HTTP 429?",
+    "referencia": "HTTP 429 indica demasiadas solicitudes.",
+    "respuesta": "Indica que el usuario ha enviado demasiadas solicitudes en un periodo de tiempo determinado.",
+    "precision": 0.21428571428571427,
+    "cobertura": 0.6,
+    "f1": 0.3157894736842105
+  },
+  {
+    "id": 13,
+    "consulta": "¿Qué indica HTTP 403?",
+    "referencia": "HTTP 403 indica que el servidor rechaza autorizar la solicitud.",
+    "respuesta": "Indica que el servidor deniega el acceso al recurso solicitado por falta de permisos.",
+    "precision": 0.2857142857142857,
+    "cobertura": 0.4,
+    "f1": 0.3333333333333333
+  },
+  {
+    "id": 14,
+    "consulta": "¿Qué significa backoff exponencial?",
+    "referencia": "El backoff exponencial aumenta la espera entre reintentos de forma exponencial.",
+    "respuesta": "Es una estrategia que incrementa exponencialmente el tiempo de espera entre reintentos tras una falla.",
+    "precision": 0.3333333333333333,
+    "cobertura": 0.45454545454545453,
+    "f1": 0.3846153846153846
+  },
+  {
+    "id": 15,
+    "consulta": "¿Para qué sirve jitter en los reintentos?",
+    "referencia": "El jitter añade aleatoriedad a la espera para evitar reintentos simultáneos.",
+    "respuesta": "Introduce aleatoriedad en los reintentos para evitar colisiones y sobrecargar el servidor.",
+    "precision": 0.4166666666666667,
+    "cobertura": 0.45454545454545453,
+    "f1": 0.43478260869565216
+  },
+  {
+    "id": 16,
+    "consulta": "¿Qué hace lower en una cadena de Python?",
+    "referencia": "lower devuelve una copia de la cadena convertida a minúsculas.",
+    "respuesta": "Convierte todas las letras mayúsculas de una cadena a minúsculas.",
+    "precision": 0.5,
+    "cobertura": 0.5,
+    "f1": 0.5
+  },
+  {
+    "id": 17,
+    "consulta": "¿Qué hace split sin argumentos en Python?",
+    "referencia": "split divide una cadena por secuencias de espacios en blanco.",
+    "respuesta": "Divide una cadena por cualquier espacio en blanco y devuelve una lista de palabras.",
+    "precision": 0.5,
+    "cobertura": 0.7,
+    "f1": 0.5833333333333334
+  },
+  {
+    "id": 18,
+    "consulta": "¿Qué hace Counter en Python?",
+    "referencia": "Counter cuenta las apariciones de cada elemento.",
+    "respuesta": "Cuenta la frecuencia de aparición de cada elemento dentro de un objeto iterable.",
+    "precision": 0.3076923076923077,
+    "cobertura": 0.5714285714285714,
+    "f1": 0.4
+  },
+  {
+    "id": 19,
+    "consulta": "¿Qué hace el modo a al escribir en un archivo?",
+    "referencia": "El modo a agrega contenido al final sin borrar el contenido existente.",
+    "respuesta": "Añade datos al final del archivo sin sobrescribirlo, creándolo si no existe.",
+    "precision": 0.25,
+    "cobertura": 0.25,
+    "f1": 0.25
+  },
+  {
+    "id": 20,
+    "consulta": "¿Qué ventaja tiene usar un mock de la API en una prueba?",
+    "referencia": "Permite probar el código sin depender de la red ni consumir la API real.",
+    "respuesta": "Permite ejecutar pruebas rápidas, confiables e independientes sin depender de servicios externos reales.",
+    "precision": 0.3076923076923077,
+    "cobertura": 0.2857142857142857,
+    "f1": 0.29629629629629634
   }
 ]
