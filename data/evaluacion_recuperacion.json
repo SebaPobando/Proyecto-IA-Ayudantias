@@ -1,0 +1,12 @@
+[
+  {"pregunta":"Que precio y stock tiene el teclado T01?","relevantes":["teclado"]},
+  {"pregunta":"Cuanto cuesta el mouse M02 y cuantas unidades hay?","relevantes":["mouse"]},
+  {"pregunta":"Como se calcula el subtotal de una cotizacion?","relevantes":["cotizacion"]},
+  {"pregunta":"Desde que subtotal el despacho es gratis?","relevantes":["despacho"]},
+  {"pregunta":"El retiro tiene cargo de despacho?","relevantes":["retiro"]},
+  {"pregunta":"El historial de session_id se pierde al cerrar el proceso?","relevantes":["memoria"]},
+  {"pregunta":"El reembolso necesita aprobacion humana?","relevantes":["reembolso"]},
+  {"pregunta":"Un pedido ya reembolsado se puede volver a reembolsar?","relevantes":["duplicado"]},
+  {"pregunta":"Los errores de autenticacion se reintentan?","relevantes":["autenticacion"]},
+  {"pregunta":"Cuantos intentos tiene el cliente ante TimeoutError?","relevantes":["reintento"]}
+]

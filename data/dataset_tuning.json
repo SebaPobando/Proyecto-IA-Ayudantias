@@ -1,0 +1,50 @@
+[
+  {
+    "text_input": "Precio del teclado T01",
+    "output": "{\"intencion\": \"producto\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Cuantas unidades de mouse M02 quedan?",
+    "output": "{\"intencion\": \"producto\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Busco el stock del teclado",
+    "output": "{\"intencion\": \"producto\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Necesito conocer el precio del mouse",
+    "output": "{\"intencion\": \"producto\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Cotiza dos teclados con despacho",
+    "output": "{\"intencion\": \"cotizacion\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Calcula el total de tres mouse para retiro",
+    "output": "{\"intencion\": \"cotizacion\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Quiero presupuesto de un teclado y envio",
+    "output": "{\"intencion\": \"cotizacion\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Cuanto pagaria por dos mouse con despacho?",
+    "output": "{\"intencion\": \"cotizacion\", \"prioridad\": \"normal\"}"
+  },
+  {
+    "text_input": "Solicito revisar un reembolso para el pedido P01",
+    "output": "{\"intencion\": \"reembolso\", \"prioridad\": \"revision_humana\"}"
+  },
+  {
+    "text_input": "Necesito devolver el dinero del pedido P02",
+    "output": "{\"intencion\": \"reembolso\", \"prioridad\": \"revision_humana\"}"
+  },
+  {
+    "text_input": "Revisa la solicitud de reembolso de P03",
+    "output": "{\"intencion\": \"reembolso\", \"prioridad\": \"revision_humana\"}"
+  },
+  {
+    "text_input": "Quiero solicitar devolucion de dinero para P04",
+    "output": "{\"intencion\": \"reembolso\", \"prioridad\": \"revision_humana\"}"
+  }
+]

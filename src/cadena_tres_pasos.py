@@ -41,18 +41,28 @@ def construir_cadena(modelo):
 
     return cadena
 
-if __name__ == "__main__":
-    load_dotenv()
-    
-    modelo = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
-    cadena = construir_cadena(modelo)
-
-    texto = """
-    La tokenización divide un texto en unidades llamadas tokens.
-    Un token puede corresponder a una palabra, parte de una palabra
-    o un signo de puntuación. Los modelos de lenguaje procesan
-    secuencias de tokens y generan su respuesta progresivamente.
-    """
-    
-    resultado = cadena.invoke({"texto": texto})
+def main():
+    import argparse
+    from pathlib import Path
+    from langchain_core.language_models.fake import FakeListLLM
+    from .configuracion import crear_modelo, guardar_json
+    parser = argparse.ArgumentParser()
+    modos = parser.add_mutually_exclusive_group()
+    modos.add_argument("--real", action="store_true")
+    modos.add_argument("--simulado", action="store_true")
+    parser.add_argument("--archivo", type=Path)
+    parser.add_argument("--salida", type=Path)
+    args = parser.parse_args()
+    texto = (args.archivo.read_text(encoding="utf-8") if args.archivo
+             else "La tokenizacion divide el texto en tokens que un modelo procesa.")
+    modelo = crear_modelo() if args.real else FakeListLLM(
+        responses=["Ideas extraidas de prueba", "Explicacion de prueba", "- Resultado simulado"])
+    resultado = construir_cadena(modelo).invoke({"texto": texto})
+    if args.salida:
+        guardar_json(args.salida, {"modo": "real" if args.real else "simulado",
+                                   "entrada": texto, "resultado": resultado})
     print(resultado)
+
+
+if __name__ == "__main__":
+    main()

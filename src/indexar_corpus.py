@@ -1,111 +1,98 @@
-import os
+"""Bloques 24 y 25: chunks con ID, metadatos y actualizacion persistente."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter, CharacterTextSplitter
+from .configuracion import DATOS, cargar_configuracion_real, guardar_json, ruta_indice
+from .embeddings_locales import EmbeddingsLocales
 
-from dotenv import load_dotenv
-from langchain_text_splitters import (
-    CharacterTextSplitter,
-    RecursiveCharacterTextSplitter,
-)
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_chroma import Chroma
+COLECCION = "proyectoia_b32"
 
-load_dotenv()
 
-clave = os.getenv("GEMINI_API_KEY")
-nombre_modelo = os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
+def cargar_corpus(ruta=None):
+    corpus = json.loads(Path(ruta or DATOS / "corpus_tienda.json").read_text(encoding="utf-8"))
+    ids = [d["id"] for d in corpus]
+    if len(ids) != len(set(ids)) or not corpus:
+        raise ValueError("El corpus debe tener IDs unicos y al menos un documento")
+    if any(not d["id"].strip() or not d["texto"].strip() or not d["fuente"].strip() for d in corpus):
+        raise ValueError("Cada documento necesita ID, texto y fuente no vacios")
+    return corpus
 
-if not clave:
-    raise ValueError("Falta GEMINI_API_KEY en el archivo .env")
+
+def crear_chunks(corpus, chunk_size=200, chunk_overlap=30):
+    if not 0 <= chunk_overlap < chunk_size:
+        raise ValueError("El overlap debe ser menor que chunk_size y no negativo")
+    splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    documentos, ids = [], []
+    for origen in corpus:
+        for n, texto in enumerate(splitter.split_text(origen["texto"])):
+            if not texto.strip():
+                raise ValueError("Se genero un chunk vacio")
+            chunk_id = f"{origen['id']}:{n}"
+            ids.append(chunk_id)
+            documentos.append(Document(page_content=texto, metadata={
+                "id": chunk_id, "source_id": origen["id"], "fuente": origen["fuente"],
+                "version": hashlib.sha256(origen["texto"].encode()).hexdigest()[:12]}))
+    return documentos, ids
+
+
+def crear_embeddings(real=False):
+    if not real:
+        return EmbeddingsLocales()
+    from langchain_google_genai import GoogleGenerativeAIEmbeddings
+    cfg = cargar_configuracion_real()
+    return GoogleGenerativeAIEmbeddings(model=cfg["embedding"], api_key=cfg["api_key"])
+
+
+def abrir_indice(real=False, directorio=None, embeddings=None):
+    from langchain_chroma import Chroma
+    return Chroma(collection_name=COLECCION,
+                  persist_directory=str(directorio or ruta_indice(real)),
+                  embedding_function=embeddings or crear_embeddings(real))
+
+
+def indexar(real=False, directorio=None, corpus=None, chunk_size=200, chunk_overlap=30):
+    carpeta = Path(directorio or ruta_indice(real))
+    carpeta.mkdir(parents=True, exist_ok=True)
+    cfg_modelo = cargar_configuracion_real()["embedding"] if real else "lexico-local-256"
+    identidad = {"modo": "real" if real else "simulado", "embedding": cfg_modelo,
+                 "coleccion": COLECCION}
+    manifiesto = carpeta / "manifiesto.json"
+    if manifiesto.exists():
+        anterior = json.loads(manifiesto.read_text(encoding="utf-8"))
+        if any(anterior[k] != identidad[k] for k in identidad):
+            raise ValueError("El indice usa otro modelo o modo. Elige otro RAG_INDEX_DIR y reindexa")
+    documentos, ids = crear_chunks(corpus if corpus is not None else cargar_corpus(), chunk_size, chunk_overlap)
+    store = abrir_indice(real, carpeta)
+    anteriores = set(store.get()["ids"])
+    store.add_documents(documentos, ids=ids)
+    obsoletos = anteriores - set(ids)
+    if obsoletos:
+        store.delete(ids=sorted(obsoletos))
+    guardados = set(store.get()["ids"])
+    if guardados != set(ids):
+        raise RuntimeError("El contenido persistido no coincide con el corpus")
+    informe = {**identidad, "chunks": len(ids), "ids": ids, "eliminados": len(obsoletos),
+               "chunk_size": chunk_size, "chunk_overlap": chunk_overlap}
+    guardar_json(manifiesto, informe)
+    return informe
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--real", action="store_true", help="Calcula embeddings en el proveedor")
+    parser.add_argument("--comparar", action="store_true")
+    args = parser.parse_args()
+    if args.comparar:
+        texto = "\n\n".join(d["texto"] for d in cargar_corpus())
+        for nombre, splitter in [("fijo", CharacterTextSplitter(separator="", chunk_size=110, chunk_overlap=0)),
+                                  ("recursivo", RecursiveCharacterTextSplitter(chunk_size=110, chunk_overlap=20))]:
+            print(nombre, json.dumps(splitter.split_text(texto), ensure_ascii=False, indent=2))
+        return
+    print(json.dumps(indexar(real=args.real), ensure_ascii=False, indent=2))
+
 
 if __name__ == "__main__":
-    corpus = [
-        "consultar_producto recibe un codigo. T01 es un Teclado de 10000 CLP "
-        "con stock 8. M02 es un Mouse de 6000 CLP con stock 12.",
-        "cotizar_compra recibe precio_unitario, cantidad e incluir_despacho. "
-        "El precio y la cantidad deben ser mayores que cero. No compra ni reserva stock.",
-        "El subtotal es precio_unitario por cantidad. El despacho cuesta 2500 CLP "
-        "si el subtotal es menor que 30000 CLP. Desde 30000 CLP es gratis. "
-        "El retiro no tiene cargo de despacho.",
-        "historiales guarda una conversacion por session_id. obtener_historial "
-        "crea o recupera su historial. Los mensajes viven en memoria y se pierden "
-        "al cerrar el programa.",
-        "generar_reembolso solo simula. Requiere aprobacion en consola con s/n "
-        "en 30 segundos. Sin aprobacion no se ejecuta. Un pedido ya reembolsado "
-        "no se repite en la misma ejecucion.",
-    ]
-
-    texto = "\n\n".join(corpus)
-
-    splitter_fijo = CharacterTextSplitter(
-        separator="", chunk_size=110, chunk_overlap=0
-    )
-    chunks_fijo = splitter_fijo.split_text(texto)
-
-    print("\nCHUNKING FIJO")
-    for i, chunk in enumerate(chunks_fijo):
-        print(f"--- chunk {i} ({len(chunk)} caracteres) ---")
-        print(chunk)
-
-    splitter_recursivo = RecursiveCharacterTextSplitter(
-        chunk_size=110, chunk_overlap=20
-    )
-    chunks_recursivo = splitter_recursivo.split_text(texto)
-
-    print("\nCHUNKING RECURSIVO")
-    for i, chunk in enumerate(chunks_recursivo):
-        print(f"--- chunk {i} ({len(chunk)} caracteres) ---")
-        print(chunk)
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=200, chunk_overlap=30
-    )
-    chunks = splitter.create_documents(corpus)
-
-    print(f"\nDocumentos originales: {len(corpus)}")
-    print(f"Chunks para indexar: {len(chunks)}")
-    for i, chunk in enumerate(chunks):
-        print(f"--- Document {i} ({len(chunk.page_content)} caracteres) ---")
-        print(chunk.page_content)
-
-    persist_directory = "vectorstore/"
-    modo = input("\nModo (indexar/verificar): ").strip().lower()
-    if modo not in ("indexar", "verificar"):
-        raise ValueError("Escribe indexar o verificar.")
-
-    if modo == "indexar" and os.path.exists(persist_directory):
-        raise ValueError(
-            "Ya existe la carpeta del indice. Usa verificar. "
-            "Para otro ensayo, cambia persist_directory."
-        )
-
-    if modo == "verificar" and not os.path.isdir(persist_directory):
-        raise ValueError("No existe la carpeta del indice. Ejecuta primero indexar.")
-
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/gemini-embedding-001",
-        api_key=clave,
-    )
-
-    if modo == "indexar":
-        try:
-            vectorstore = Chroma.from_documents(
-                documents=chunks,
-                embedding=embeddings,
-                persist_directory=persist_directory,
-            )
-        except Exception as error:
-            print("No se completo la indexacion:", type(error).__name__)
-            raise SystemExit(1) from error
-
-        print(f"Indexados {len(chunks)} chunks en {persist_directory}")
-
-    vectorstore_recargado = Chroma(
-        persist_directory=persist_directory,
-        embedding_function=embeddings,
-    )
-    cantidad_guardada = vectorstore_recargado._collection.count()
-    print(f"Chunks guardados: {cantidad_guardada}")
-
-    if cantidad_guardada != len(chunks):
-        raise ValueError("El conteo guardado no coincide con el corpus actual.")
-
-    print("Indice abierto y conteo correcto. La recarga no calcula embeddings.")
+    main()

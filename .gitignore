@@ -19,3 +19,11 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Indices regenerables, estados locales y registros que pueden contener datos
+.local/
+vectorstore*/
+chroma_db/
+*.sqlite3
+*.db
+.pytest_cache/

@@ -150,23 +150,21 @@ def mostrar_resultado(resultado, sesion):
 
 
 def registrar_traza(resultado, sesion):
-    registro = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "session_id": sesion,
-        "entrada": resultado["entrada"],
-        "acciones": [
-            {
-                "herramienta": accion.tool,
-                "argumentos": accion.tool_input,
-                "observacion": observacion,
-            }
-            for accion, observacion in resultado["intermediate_steps"]
-        ],
-        "aprobaciones": registro_aprobaciones.copy(),
-        "respuesta_final": resultado["output"],
-    }
-    with open("docs/trazas_agente.jsonl", "a", encoding="utf-8") as archivo:
-        archivo.write(json.dumps(registro, ensure_ascii=False) + "\n")
+    # Bloque 31: no duplicar preguntas, argumentos, observaciones o datos personales.
+    if __package__:
+        from .configuracion import LOCAL
+        from .logging_rag import Auditor, nueva_traza
+    else:
+        from configuracion import LOCAL
+        from logging_rag import Auditor, nueva_traza
+    auditor = Auditor(LOCAL / "registros_reales" / "trazas_agente.jsonl")
+    with nueva_traza():
+        auditor.emitir("turno_agente", modo="real",
+                       pregunta_len=len(resultado["entrada"]),
+                       respuesta_len=len(resultado["output"]),
+                       n_herramientas=len(resultado["intermediate_steps"]),
+                       herramientas=[accion.tool for accion, _ in resultado["intermediate_steps"]],
+                       n_aprobaciones=len(registro_aprobaciones))
 
 
 if __name__ == "__main__":
@@ -237,4 +235,4 @@ if __name__ == "__main__":
         finally:
             registrar_traza(resultado, "cliente_a")
     print("\nREEMBOLSOS SIMULADOS:", reembolsos)
-    print("Trazas guardadas en docs/trazas_agente.jsonl")
+    print("Trazas minimizadas guardadas en .local/registros_reales/trazas_agente.jsonl")

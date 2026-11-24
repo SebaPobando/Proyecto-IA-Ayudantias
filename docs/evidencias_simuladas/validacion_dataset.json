@@ -1,0 +1,11 @@
+{
+  "ejemplos": 12,
+  "balance": {
+    "producto": 4,
+    "cotizacion": 4,
+    "reembolso": 4
+  },
+  "errores": [],
+  "origen": "ficticio redactado para la tienda",
+  "entrenamiento_ejecutado": false
+}

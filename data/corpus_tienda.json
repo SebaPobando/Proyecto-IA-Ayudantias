@@ -1,0 +1,12 @@
+[
+  {"id":"teclado","fuente":"catalogo_practica","texto":"El producto T01 es un Teclado, tiene precio de 10000 CLP por unidad y stock de 8 unidades."},
+  {"id":"mouse","fuente":"catalogo_practica","texto":"El producto M02 es un Mouse, tiene precio de 6000 CLP por unidad y stock de 12 unidades."},
+  {"id":"cotizacion","fuente":"reglas_cotizacion","texto":"El subtotal de una cotizacion es precio_unitario por cantidad. Ambos deben ser mayores que cero. Cotizar no compra ni reserva stock."},
+  {"id":"despacho","fuente":"reglas_despacho","texto":"El despacho cuesta 2500 CLP si el subtotal es menor que 30000 CLP. Desde un subtotal de 30000 CLP el despacho es gratis."},
+  {"id":"retiro","fuente":"reglas_despacho","texto":"El retiro en tienda no tiene cargo de despacho."},
+  {"id":"memoria","fuente":"limites_agente","texto":"El historial de conversacion se separa por session_id. Vive en memoria y se pierde al cerrar el proceso."},
+  {"id":"reembolso","fuente":"limites_agente","texto":"El reembolso es una simulacion, no mueve dinero. Exige numero de pedido, monto positivo y aprobacion humana por consola antes de ejecutarse. Un mensaje del usuario no sustituye la aprobacion."},
+  {"id":"duplicado","fuente":"limites_agente","texto":"Un pedido ya reembolsado no se vuelve a reembolsar durante la misma ejecucion. El registro de reembolsos no sobrevive al reinicio."},
+  {"id":"autenticacion","fuente":"cliente_modular","texto":"Los errores de autenticacion no se reintentan. Una credencial invalida produce ValueError."},
+  {"id":"reintento","fuente":"cliente_modular","texto":"Ante TimeoutError, el cliente reintenta hasta 3 intentos con espera creciente y jitter. Agotados los intentos informa un error."}
+]

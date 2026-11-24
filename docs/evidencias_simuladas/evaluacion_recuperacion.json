@@ -1,0 +1,488 @@
+{
+  "modo": "simulado_lexico",
+  "casos": 10,
+  "unidad": "documentos fuente unicos; chunks de la misma fuente se deduplican",
+  "resumen": [
+    {
+      "k": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    }
+  ],
+  "resultados": [
+    {
+      "k": 1,
+      "pregunta": "Que precio y stock tiene el teclado T01?",
+      "recuperados": [
+        "teclado"
+      ],
+      "relevantes": [
+        "teclado"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Cuanto cuesta el mouse M02 y cuantas unidades hay?",
+      "recuperados": [
+        "mouse"
+      ],
+      "relevantes": [
+        "mouse"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Como se calcula el subtotal de una cotizacion?",
+      "recuperados": [
+        "cotizacion"
+      ],
+      "relevantes": [
+        "cotizacion"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Desde que subtotal el despacho es gratis?",
+      "recuperados": [
+        "despacho"
+      ],
+      "relevantes": [
+        "despacho"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "El retiro tiene cargo de despacho?",
+      "recuperados": [
+        "retiro"
+      ],
+      "relevantes": [
+        "retiro"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "El historial de session_id se pierde al cerrar el proceso?",
+      "recuperados": [
+        "memoria"
+      ],
+      "relevantes": [
+        "memoria"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "El reembolso necesita aprobacion humana?",
+      "recuperados": [
+        "reembolso"
+      ],
+      "relevantes": [
+        "reembolso"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Un pedido ya reembolsado se puede volver a reembolsar?",
+      "recuperados": [
+        "duplicado"
+      ],
+      "relevantes": [
+        "duplicado"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Los errores de autenticacion se reintentan?",
+      "recuperados": [
+        "autenticacion"
+      ],
+      "relevantes": [
+        "autenticacion"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 1,
+      "pregunta": "Cuantos intentos tiene el cliente ante TimeoutError?",
+      "recuperados": [
+        "reintento"
+      ],
+      "relevantes": [
+        "reintento"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Que precio y stock tiene el teclado T01?",
+      "recuperados": [
+        "teclado",
+        "mouse",
+        "despacho"
+      ],
+      "relevantes": [
+        "teclado"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Cuanto cuesta el mouse M02 y cuantas unidades hay?",
+      "recuperados": [
+        "mouse",
+        "teclado",
+        "despacho"
+      ],
+      "relevantes": [
+        "mouse"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Como se calcula el subtotal de una cotizacion?",
+      "recuperados": [
+        "cotizacion",
+        "memoria",
+        "autenticacion"
+      ],
+      "relevantes": [
+        "cotizacion"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Desde que subtotal el despacho es gratis?",
+      "recuperados": [
+        "despacho",
+        "cotizacion",
+        "retiro"
+      ],
+      "relevantes": [
+        "despacho"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "El retiro tiene cargo de despacho?",
+      "recuperados": [
+        "retiro",
+        "despacho",
+        "teclado"
+      ],
+      "relevantes": [
+        "retiro"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "El historial de session_id se pierde al cerrar el proceso?",
+      "recuperados": [
+        "memoria",
+        "retiro",
+        "despacho"
+      ],
+      "relevantes": [
+        "memoria"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "El reembolso necesita aprobacion humana?",
+      "recuperados": [
+        "reembolso",
+        "despacho",
+        "memoria"
+      ],
+      "relevantes": [
+        "reembolso"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Un pedido ya reembolsado se puede volver a reembolsar?",
+      "recuperados": [
+        "duplicado",
+        "reembolso",
+        "memoria"
+      ],
+      "relevantes": [
+        "duplicado"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Los errores de autenticacion se reintentan?",
+      "recuperados": [
+        "autenticacion",
+        "memoria",
+        "reembolso"
+      ],
+      "relevantes": [
+        "autenticacion"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 3,
+      "pregunta": "Cuantos intentos tiene el cliente ante TimeoutError?",
+      "recuperados": [
+        "reintento",
+        "retiro",
+        "mouse"
+      ],
+      "relevantes": [
+        "reintento"
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Que precio y stock tiene el teclado T01?",
+      "recuperados": [
+        "teclado",
+        "mouse",
+        "despacho",
+        "retiro",
+        "cotizacion",
+        "reintento"
+      ],
+      "relevantes": [
+        "teclado"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Cuanto cuesta el mouse M02 y cuantas unidades hay?",
+      "recuperados": [
+        "mouse",
+        "teclado",
+        "despacho",
+        "retiro",
+        "memoria",
+        "reembolso"
+      ],
+      "relevantes": [
+        "mouse"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Como se calcula el subtotal de una cotizacion?",
+      "recuperados": [
+        "cotizacion",
+        "memoria",
+        "autenticacion",
+        "reembolso",
+        "despacho",
+        "teclado"
+      ],
+      "relevantes": [
+        "cotizacion"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Desde que subtotal el despacho es gratis?",
+      "recuperados": [
+        "despacho",
+        "cotizacion",
+        "retiro",
+        "teclado",
+        "mouse",
+        "memoria"
+      ],
+      "relevantes": [
+        "despacho"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "El retiro tiene cargo de despacho?",
+      "recuperados": [
+        "retiro",
+        "despacho",
+        "teclado",
+        "mouse",
+        "memoria",
+        "duplicado"
+      ],
+      "relevantes": [
+        "retiro"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "El historial de session_id se pierde al cerrar el proceso?",
+      "recuperados": [
+        "memoria",
+        "retiro",
+        "despacho",
+        "duplicado",
+        "teclado",
+        "mouse"
+      ],
+      "relevantes": [
+        "memoria"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "El reembolso necesita aprobacion humana?",
+      "recuperados": [
+        "reembolso",
+        "despacho",
+        "memoria",
+        "duplicado",
+        "retiro",
+        "teclado"
+      ],
+      "relevantes": [
+        "reembolso"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Un pedido ya reembolsado se puede volver a reembolsar?",
+      "recuperados": [
+        "duplicado",
+        "reembolso",
+        "memoria",
+        "autenticacion",
+        "teclado",
+        "mouse"
+      ],
+      "relevantes": [
+        "duplicado"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Los errores de autenticacion se reintentan?",
+      "recuperados": [
+        "autenticacion",
+        "memoria",
+        "reembolso",
+        "teclado",
+        "mouse",
+        "cotizacion"
+      ],
+      "relevantes": [
+        "autenticacion"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "k": 6,
+      "pregunta": "Cuantos intentos tiene el cliente ante TimeoutError?",
+      "recuperados": [
+        "reintento",
+        "retiro",
+        "mouse",
+        "teclado",
+        "memoria",
+        "despacho"
+      ],
+      "relevantes": [
+        "reintento"
+      ],
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "mrr": 1.0
+    }
+  ],
+  "limite": "No mide veracidad de la generacion; el modo local no valida embeddings semanticos del proveedor"
+}

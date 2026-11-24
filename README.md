@@ -1,5 +1,58 @@
 # Proyecto Gradual Ayudantías — Especialización en Desarrollo con IA Generativa (Accenture)
 
+## Actualizacion hasta el bloque 32
+
+El asistente de tienda incorpora indexacion con fuentes, RAG con citas, evaluacion
+de recuperacion, registro de tiempos y consumo, dataset de personalizacion,
+decision fundamentada, proteccion ante inyeccion, versionado y supervision de prompts.
+
+El recorrido sin API se ejecuta desde la raiz:
+
+```powershell
+.\venv\Scripts\python.exe -m src.demo_bloque32
+.\venv\Scripts\python.exe -m pytest -q
+```
+
+Los comandos nuevos se ejecutan como modulos, con `python -m src.nombre`.
+El modo predeterminado no llama a proveedores. `--real` se pide expresamente.
+La demostracion usa Chroma persistente con vectores lexicos locales y respuestas
+extractivas: comprueba conexiones y controles, no calidad semantica de un modelo.
+No inventa tokens ni costos: si faltan datos, quedan `null`.
+
+Consulta [la guia de ejecucion](docs/guia_bloques24_32.md),
+[la matriz de riesgos](docs/matriz_riesgos.md),
+[la decision de personalizacion](docs/decision_personalizacion.md) y
+[el estado de las evidencias](docs/estado_bloque32.md).
+
+Para revisar y activar la ultima version del prompt:
+
+```powershell
+.\venv\Scripts\python.exe -m src.registro_prompts
+.\venv\Scripts\python.exe -m src.grafo_supervision
+```
+
+El segundo comando pausa y pide `aprobar` o `rechazar`. Solo una aprobacion humana
+cambia `.local/prompt_activo.json`, que lee el flujo RAG. `--verificar` prueba ambas
+ramas sin cambiar la version activa. Es un flujo local de una consola, con estado
+del grafo en memoria; no es un sistema de aprobaciones de produccion.
+
+Para el modo real, agrega en tu `.env` existente las variables documentadas en
+`.env.example`: clave, modelo, modelo de embeddings y, si quieres estimar costo
+de generacion, las dos tarifas verificadas en USD por millon de tokens. El costo
+mostrado no incluye embeddings, indexacion ni otros cargos. No se han ejecutado
+consultas reales ni entrenamiento como parte de esta actualizacion.
+
+Si el entorno `venv` informa `No Python at ...`, su interprete base no esta
+disponible en esa sesion. Puedes crear otro entorno sin borrar el anterior:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m src.demo_bloque32
+```
+
+Si usas ese entorno, reemplaza `venv` por `.venv` en los comandos de esta guia.
+
 Esta es la estructura base que vas a usar como punto de partida para tu proyecto en este programa. Es la misma estructura que vas a ir ampliando bloque a bloque, hasta llegar a la aplicación completa que entregas en el Gate 3.
 
 ## Cómo empezar
@@ -42,7 +95,7 @@ Para ensayar las conexiones con respuestas prefijadas, sin consumir API:
 Para usar una entrada real del proyecto, consultar Gemini y guardar entrada y resultado:
 
 ```powershell
-.\venv\Scripts\python.exe -m src.cadena_tres_pasos --archivo README.md --salida docs/bloque18_real.json
+.\venv\Scripts\python.exe -m src.cadena_tres_pasos --real --archivo README.md --salida docs/bloque18_real.json
 ```
 
 Puedes reemplazar `README.md` por otro archivo de texto UTF-8 relacionado con tu
