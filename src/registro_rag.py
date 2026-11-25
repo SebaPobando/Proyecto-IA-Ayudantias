@@ -10,7 +10,7 @@ from .configuracion import DOCS, LOCAL, crear_modelo
 from .logging_rag import Auditor, nueva_traza
 from .recuperacion import recuperar
 from .registro_prompts import obtener_activa
-from .seguridad_rag import filtrar_contexto, construir_mensajes, citas_validas
+from .seguridad_rag import filtrar_contexto, construir_mensajes, citas_validas, numeros_citados
 
 
 def calcular_costo_generacion(tokens, entrada_millon=None, salida_millon=None):
@@ -116,6 +116,10 @@ def main():
     except Exception as error:
         raise SystemExit("No se completo la consulta. Tipo de error: " + type(error).__name__) from None
     print(resultado["respuesta"])
+    for numero in numeros_citados(resultado["respuesta"]):
+        cita = resultado["citas"].get(numero)
+        if cita:
+            print(f"Fuente [{numero}] {cita['fuente']} ({cita['id']})")
     print(json.dumps(resultado["registro"], ensure_ascii=False, indent=2))
 
 

@@ -35,6 +35,10 @@ def construir_mensajes(pregunta, documentos, texto_sistema):
     return mensajes, citas
 
 
+def numeros_citados(respuesta):
+    return list(dict.fromkeys(re.findall(r"\[(\d+)\]", respuesta)))
+
+
 def citas_validas(respuesta, citas):
-    usadas = re.findall(r"\[(\d+)\]", respuesta)
+    usadas = numeros_citados(respuesta)
     return bool(usadas) and all(numero in citas for numero in usadas)
